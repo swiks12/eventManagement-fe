@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const Button = ({data}) => {
+const Button = ({ data }) => {
   return (
-    <button className='bg-white text-black rounded-2xl p-3 hover:bg-gray-100 w-fit place-self-center font-medium'>{data}</button>
-  )
-}
+    <button className="bg-black text-white rounded-lg p-[10px] pr-6 pl-6  w-fit place-self-center font-medium">
+      {data}
+    </button>
+  );
+};
 
-export default Button
+export default Button;
