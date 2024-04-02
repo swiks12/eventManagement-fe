@@ -4,6 +4,9 @@ import Button from "../components/reusable/Button";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const loginUser=(e)=>{
+      e.preventDefault()
+  }
   return (
     <>
       <div className="bg-gradient-to-r from-yellow-tone to-pink-tone p-4 h-[100vh] flex justify-center items-center">
@@ -15,7 +18,7 @@ const Login = () => {
             <div>
               <p className="font-bold text-3xl mb-3 text-center">Log In</p>
             </div>
-            <form action="" className="flex flex-col gap-3">
+            <form onSubmit={loginUser} className="flex flex-col gap-3">
               <input
                 type="email"
                 placeholder="Email"
