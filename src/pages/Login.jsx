@@ -14,6 +14,7 @@ const Login = () => {
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
+    //ttyai vayera name ra mathi use state ko identification same hunu parcha
   };
 
   const handleSubmit=async(e)=>{
