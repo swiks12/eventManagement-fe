@@ -1,0 +1,11 @@
+  .ol-attribution {
+    display: none !important;
+  }
+
+  .gcd-gl-input {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    outline: none;
+  }
+  

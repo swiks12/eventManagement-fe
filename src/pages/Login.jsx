@@ -27,6 +27,7 @@ const Login = () => {
       localStorage.setItem("token",res.data);
       window.location="/"
       console.log(res.message);
+      console.log("logged in");
     } catch (error) {
       if(error.response && error.response.status>=400 && error.response.status<=500){
         setError(error.response.data.message)
