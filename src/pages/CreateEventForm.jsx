@@ -3,6 +3,7 @@ import Button from "../components/reusable/Button";
 import people from "../assets/people.png";
 import creation from "../assets/creation.png";
 
+
 const CreateEventForm = () => {
   return (
     <>
@@ -48,9 +49,7 @@ const CreateEventForm = () => {
               className="bg-white rounded-2xl p-[9px] border"
             />
             <p>Insert Event Banner</p>
-            <button className="p-1 bg-black text-white rounded-2xl w-fit">
-              Browse
-            </button>
+            <input type="file" name="banner" />
             <Button data="Submit" type="submit" />
           </form>
         </div>
