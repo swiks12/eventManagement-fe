@@ -10,7 +10,6 @@ const OrganizerEvents = () => {
         <button className="p-5 pl-6 pr-6 bg-black text-white rounded-2xl fixed bottom-8 left-[90%] font-bold">
           +
         </button>
-
         </Link>
       </div>
     </>

@@ -9,7 +9,7 @@ const CreateEventForm = () => {
   const [locationDetails, setLocationDetails] = useState('');
   return (
     <>
-      <div className="flex flex-col justify-center m-5 ">
+      <div className="flex flex-col justify-center m-5 gap-7">
         <div>
           <p className="font-extrabold text-4xl ">Create your events now!!</p>
         </div>
@@ -18,7 +18,7 @@ const CreateEventForm = () => {
           <form className="flex flex-col gap-4 w-[80vw] ">
             <input
               type="text"
-              name="eventName"
+              name="eventName" 
               placeholder="Name of the event"
               required
               className="bg-white rounded-2xl p-[9px] border"
