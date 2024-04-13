@@ -75,7 +75,7 @@ const MapComponent = ({ locationDetails, setLocationDetails }) => {
     };
   }, []);
 
-  return <div id="map" style={{ width: "100%", height: "300px" }}></div>;
+  return <div id="map" style={{ width: "100%", height: "250px" }}></div>;
 };
 
 export default MapComponent;

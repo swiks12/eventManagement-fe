@@ -55,6 +55,9 @@ const Login = () => {
       if (res.data.user.role === "organizer") {
         navigate("/organizer/home");
       }
+      else if(res.data.user.role==="admin"){
+        navigate("/admin/home");
+      }
       // await verifyToken();
       // window.location = "/";
       console.log(res.message);

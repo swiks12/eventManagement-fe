@@ -1,84 +1,63 @@
-import React, { useState } from "react";
-import Button from "../components/reusable/Button";
-import people from "../assets/people.png";
-import creation from "../assets/creation.png";
-import MapComponent from "../components/map/MapComponent";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {toast,ToastContainer} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import MapComponent from "../components/map/MapComponent";
+import Button from "../components/reusable/Button";
 
-
-const CreateEventForm = () => {
+const UpdateEventForm = ({ eventId }) => {
   const [locationDetails, setLocationDetails] = useState("");
   const [data, setData] = useState({
     eventName: "",
     eventDate: "",
-    address:"",
+    address: "",
     time: "",
     price: "",
     description: "",
     coordinates: "",
-    image:"",
-    organizerId: JSON.parse(localStorage.getItem('user-data'))._id
-    //object ma convert garna parse garne ani balla . gari use hanna milcha
+    image: "",
+    organizerId: JSON.parse(localStorage.getItem("user-data"))._id,
   });
 
-
-  console.log(data, 'eventData')
-
-  //this part pheri bujhau vanne babu lai ali confuse vaye yati thacha malai calue change vairakheko value ma basxa thyo use state le name ma kam garne vayekole name ma rakheko
-
-  const handleChange=({currentTarget:input})=>{
-    setData({...data,[input.name]:input.value});
-  }
-
-  const handleImage=(e)=>{
-    if(!e.target.value){
-      return;
-    }
-    //getting the image 
-    const file=e.target.files[0];
-    //calling another function with sending file as parameter
-    previewFile(file);
-    console.log(file); 
-   };
-
-   const previewFile=(file)=>{
-      const reader=new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload=()=>{
-        setData((prevData) => ({
-          ...prevData,
-          image: reader.result, // Update the image field with the data URL
-        }));
+  useEffect(() => {
+    const fetchEventDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/events/getEvents`
+        );
+        const eventData = response.data;
+        setData(eventData);
+      } catch (error) {
+        console.error(error);
       }
-   }
+    };
 
-   
+    fetchEventDetails();
+  }, [eventId]);
 
-  const handleSubmit=async(e)=>{
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url="http://localhost:8080/api/events/add";
-      const {data:res}=await axios.post(url,data);
-      console.log(res);
-      toast.success("Event Created succesfully!")
+      const url = `http://localhost:8080/api/events/update/`;
+      const { data: res } = await axios.put(url, data);
+      toast.success("Event Updated Successfully!");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }
+  };
 
   return (
     <>
-    <ToastContainer />
       <div className="flex flex-col justify-center m-5 gap-7">
         <div>
           <p className="font-extrabold text-4xl text-center">
-            Create your events now!!
+            Update Event
           </p>
         </div>
         <div className="flex justify-center p-8 items-center rounded-2xl bg-opacity-100">
-          {/* <img src={people} alt="" className=" h-[83vh]" /> */}
           <form className="flex flex-col gap-4 w-[80vw] " onSubmit={handleSubmit}>
             <input
               type="text"
@@ -92,8 +71,16 @@ const CreateEventForm = () => {
             <p>Browse Event Location</p>
             <MapComponent
               locationDetails={locationDetails}
-              //prev ma mathi ko sab aaucha use sate ma vako
-              setLocationDetails={(locationDetails => setData(prev => ({...prev, address: locationDetails.address.details.name, coordinates: [locationDetails.place.lon, locationDetails.place.lat]})))}
+              setLocationDetails={(locationDetails) =>
+                setData((prev) => ({
+                  ...prev,
+                  address: locationDetails.address.details.name,
+                  coordinates: [
+                    locationDetails.place.lon,
+                    locationDetails.place.lat,
+                  ],
+                }))
+              }
             />
             <p>{locationDetails && locationDetails.address.details.name}</p>
             <p>Enter Event Day</p>
@@ -102,8 +89,8 @@ const CreateEventForm = () => {
               name="eventDate"
               placeholder="Enter event Date"
               required
-              onChange={handleChange}
               value={data.eventDate}
+              onChange={handleChange}
               className="bg-white rounded-2xl p-[9px] border"
             />
             <input
@@ -135,8 +122,8 @@ const CreateEventForm = () => {
               rows={5}
             />
             <p>Insert Event Banner</p>
-            <input type="file" name="image"  onChange={handleImage} />
-            <Button data="Submit" type="submit" />
+            <input type="file" name="image" onChange={handleChange} />
+            <Button data="Update" type="submit" />
           </form>
         </div>
       </div>
@@ -144,4 +131,4 @@ const CreateEventForm = () => {
   );
 };
 
-export default CreateEventForm;
+export default UpdateEventForm;
