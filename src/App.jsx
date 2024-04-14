@@ -3,13 +3,16 @@ import AdminNav from "./components/admin/adminNav";
 import NavbarComp from "./components/reusable/orgComp/NavbarComp";
 import UserNav from "./components/user/UserNav";
 import AdminHome from "./pages/AdminHome";
+import AdminRequest from "./pages/AdminRequest";
 import CreateEventForm from "./pages/CreateEventForm";
 import Login from "./pages/Login";
 import OrganizerEvents from "./pages/OrganizerEvents";
 import OrganizerHome from "./pages/OrganizerHome";
 import Signup from "./pages/Signup";
+import UserEvent from "./pages/UserEvent";
 import UserHome from "./pages/UserHome";
 import Landing from "./pages/landing";
+import IndividualEvent from "./pages/IndividualEvent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -30,12 +33,14 @@ function App() {
           </Route>
           <Route path="/admin" element={<AdminNav />}>
           <Route path="home" element={<AdminHome />}/>
+          <Route path="requests" element={<AdminRequest />}/>
+
           </Route>
           <Route path="/user" element={<UserNav />}>
           <Route path="home" element={<UserHome />}/>
+          <Route path="events" element={<UserEvent />}/>
+          <Route path="events/:id" element={<IndividualEvent />}/>
           </Route>
-          
-
         </Routes>
       </BrowserRouter>
     </>

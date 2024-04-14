@@ -28,16 +28,23 @@ const OrganizerEvents = () => {
   return (
     <>
     <ToastContainer />
-      <div >
-        
+    <p className="text-3xl font-extrabold  mt-4 text-center">Lets see your events here!</p>
+      <div className="p-6 flex justify-evenly flex-wrap">
           {/* //map vaneko js ho so use in curly */}
           {data.map((item,i)=>
           (
-            <div key={i}>
-              <img src={item.image.url} alt="" />
-              <p>{item.name}</p>
-              <p>{item.statusVal}</p>
-              <button className="bg-red-500 p-4" onClick={() => handleDelete(item._id)}>delete</button>
+            <div key={i} className="p-4 border rounded-2xl shadow-2xl">
+              <img src={item.image.url} alt="banner" className="w-[40vw] rounded-xl " />
+              <div>
+              <div>
+                <p className="text-xl font-bold">Name :{item.name}</p>
+                <p>Status: {item.statusVal}</p>
+              </div>
+              <div className="flex flex-row gap-3 mt-2">
+                <button className="bg-blue-500  pl-3 pr-3 rounded-2xl place-self-end font-medium" onClick={() => handleDelete(item._id)}>update</button>
+                <button className="bg-red-500  pl-3 pr-3 rounded-2xl place-self-end font-medium" onClick={() => handleDelete(item._id)}>delete</button>
+              </div>
+              </div>
             </div>
           ))}
         <Link to="/organizer/events/create">

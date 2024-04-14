@@ -8,7 +8,7 @@ const AdminNav = () => {
         <Link to="/admin/home">
           <p className="font-semibold">HOME</p>
         </Link>
-        <Link to="">
+        <Link to="/admin/requests">
           <p className="font-semibold">REQUESTS</p>
         </Link>
         <Link to="">

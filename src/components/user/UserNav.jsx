@@ -8,7 +8,7 @@ const UserNav = () => {
         <Link to="/user/home">
           <p className="font-semibold">HOME</p>
         </Link>
-        <Link to="">
+        <Link to="/user/events">
           <p className="font-semibold">EVENTS</p>
         </Link>
         <Link to="">
