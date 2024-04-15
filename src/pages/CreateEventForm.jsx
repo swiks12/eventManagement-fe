@@ -6,6 +6,7 @@ import MapComponent from "../components/map/MapComponent";
 import axios from "axios";
 import {toast,ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 
 const CreateEventForm = () => {
@@ -25,6 +26,9 @@ const CreateEventForm = () => {
 
 
   console.log(data, 'eventData')
+
+
+  const navigate=useNavigate();
 
   //this part pheri bujhau vanne babu lai ali confuse vaye yati thacha malai calue change vairakheko value ma basxa thyo use state le name ma kam garne vayekole name ma rakheko
 
@@ -63,6 +67,7 @@ const CreateEventForm = () => {
       const {data:res}=await axios.post(url,data);
       console.log(res);
       toast.success("Event Created succesfully!")
+      navigate("/organizer/events");
     } catch (error) {
       console.log(error);
     }

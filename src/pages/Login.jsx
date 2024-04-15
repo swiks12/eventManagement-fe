@@ -58,6 +58,9 @@ const Login = () => {
       else if(res.data.user.role==="admin"){
         navigate("/admin/home");
       }
+      else {
+        navigate("/user/home");
+      }
       // await verifyToken();
       // window.location = "/";
       console.log(res.message);

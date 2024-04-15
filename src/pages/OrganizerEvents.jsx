@@ -29,11 +29,11 @@ const OrganizerEvents = () => {
     <>
     <ToastContainer />
     <p className="text-3xl font-extrabold  mt-4 text-center">Lets see your events here!</p>
-      <div className="p-6 flex justify-evenly flex-wrap">
+      <div className="p-6 flex gap-8 flex-wrap ">
           {/* //map vaneko js ho so use in curly */}
           {data.map((item,i)=>
           (
-            <div key={i} className="p-4 border rounded-2xl shadow-2xl">
+            <div key={i} className="p-4 border rounded-2xl shadow-2xl mb-6">
               <img src={item.image.url} alt="banner" className="w-[40vw] rounded-xl " />
               <div>
               <div>
