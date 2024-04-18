@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CreateEventForm from "./CreateEventForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {toast,ToastContainer} from "react-toastify";
 
 
 const OrganizerEvents = () => {
   const [data,setData]=useState([]);
+  const navigate=useNavigate();
   const user = JSON.parse(localStorage.getItem('user-data'))
   //use eefet used to  re render component
   useEffect(()=>{
@@ -41,7 +42,7 @@ const OrganizerEvents = () => {
                 <p>Status: {item.statusVal}</p>
               </div>
               <div className="flex flex-row gap-3 mt-2">
-                <button className="bg-blue-500  pl-3 pr-3 rounded-2xl place-self-end font-medium" onClick={() => handleDelete(item._id)}>update</button>
+                <button className="bg-blue-500  pl-3 pr-3 rounded-2xl place-self-end font-medium" onClick={() =>navigate(`/organizer/update/${item._id}`) }>update</button>
                 <button className="bg-red-500  pl-3 pr-3 rounded-2xl place-self-end font-medium" onClick={() => handleDelete(item._id)}>delete</button>
               </div>
               </div>

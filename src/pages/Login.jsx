@@ -3,13 +3,16 @@ import login from "../assets/login.png";
 import Button from "../components/reusable/Button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer ,toast} from "react-toastify";
+
 
 const Login = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
@@ -65,18 +68,15 @@ const Login = () => {
       // window.location = "/";
       console.log(res.message);
     } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
+      console.log(error);
+      toast.error(error.response.data.message);
+      //error bata j response aako cha tyasko data vaihalcha tyasko chai dekhaune ho hamro yo message
     }
   };
 
   return (
     <>
+    <ToastContainer/>
       <div className="bg-gradient-to-r from-yellow-tone to-pink-tone p-4 h-[100vh] flex justify-center items-center">
         <div className="flex items-center space-x-[100px] bg-white w-[70vw] m-8 rounded-3xl bg-opacity-50">
           <div>

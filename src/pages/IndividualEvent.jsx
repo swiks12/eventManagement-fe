@@ -17,6 +17,10 @@ const IndividualEvent = () => {
     fetchIndividualEvents();
   }, [params.id]);
 
+
+  //dependency ma rakheko chiz jaba jaba change huncha taba taba chai api hit hanne-aaile ko case ma
+
+
   if (!data) {
     return <div>Loading...</div>; // Return a loading indicator while data is being fetched
   }

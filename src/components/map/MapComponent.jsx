@@ -7,6 +7,7 @@ import OSM from "ol/source/OSM";
 import Overlay from "ol/Overlay";
 import Geocoder from "ol-geocoder";
 import "../../assets/css/map.css";
+import { parse } from "ol/expr/expression";
 
 const MapComponent = ({ locationDetails, setLocationDetails }) => {
   useEffect(() => {
@@ -59,6 +60,11 @@ const MapComponent = ({ locationDetails, setLocationDetails }) => {
     // Add the Geocoder control to the map
     map.addControl(geocoder);
 
+    if (locationDetails){
+      popup.show([parseInt(locationDetails.coordinates[0]),parseInt(locationDetails.coordinates[1])], locationDetails.address);  
+    }
+
+    
     // Listen for the 'addresschosen' event
     geocoder.on("addresschosen", function (evt) {
       console.log(evt);

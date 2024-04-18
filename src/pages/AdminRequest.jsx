@@ -33,7 +33,7 @@ const handleApproval = async(id,status) => {
     <>
     {/* yo tala ko div ma chahi sab items haru hncha i.e tala are all the children mathi ko div ma changes gare flex parent ho */}
     {/* sab item map hanne div talako ho */}
-        <div className='p-6 flex justify-evenly flex-wrap'>
+        <div className='p-4 flex justify-evenly flex-wrap'>
             {data.map((item,i)=>(
                 //harek item mapp hanne div yo yo chai
                 <div key={i} className='p-4 border rounded-2xl shadow-xl mb-[30px]'>

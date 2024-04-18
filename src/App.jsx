@@ -14,6 +14,7 @@ import UserHome from "./pages/UserHome";
 import Landing from "./pages/landing";
 import IndividualEvent from "./pages/IndividualEvent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UpdateEventForm from "./pages/updateEventForm";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <Route path="home" element={<OrganizerHome />}/>
           <Route path="events" element={<OrganizerEvents />}/>
           <Route path="events/create" element={<CreateEventForm/>}/>
+          <Route path="update/:id" element={<UpdateEventForm />}/>
+
           {/* <Route path="/Home" element={<OrganizerHome />}/> */}
           </Route>
           <Route path="/admin" element={<AdminNav />}>

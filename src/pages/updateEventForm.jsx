@@ -3,12 +3,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import MapComponent from "../components/map/MapComponent";
 import Button from "../components/reusable/Button";
+import { useParams } from "react-router-dom";
 
 const UpdateEventForm = ({ eventId }) => {
   const [locationDetails, setLocationDetails] = useState("");
   const [data, setData] = useState({
-    eventName: "",
-    eventDate: "",
+    name: "",
+    date: "",
     address: "",
     time: "",
     price: "",
@@ -17,31 +18,31 @@ const UpdateEventForm = ({ eventId }) => {
     image: "",
     organizerId: JSON.parse(localStorage.getItem("user-data"))._id,
   });
+  //ya databse anusar name hunu huncha
 
+  const params=useParams();
   useEffect(() => {
-    const fetchEventDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/api/events/getEvents`
-        );
-        const eventData = response.data;
-        setData(eventData);
-      } catch (error) {
-        console.error(error);
-      }
+    const fetchIndividualEvents = async () => {
+      const url = `http://localhost:8080/api/events/individualEvents/${params.id}`;
+      console.log(url);
+      const { data: res } = await axios.get(url);
+      setData(res);
     };
+    fetchIndividualEvents();
+  }, []);
 
-    fetchEventDetails();
-  }, [eventId]);
+   //[] vaneko aba ekchoti matra chalxa j gareni prama.id ta aaaihalcha
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `http://localhost:8080/api/events/update/`;
+      const url = `http://localhost:8080/api/events/update/${params.id}`;
       const { data: res } = await axios.put(url, data);
       toast.success("Event Updated Successfully!");
     } catch (error) {
@@ -61,10 +62,10 @@ const UpdateEventForm = ({ eventId }) => {
           <form className="flex flex-col gap-4 w-[80vw] " onSubmit={handleSubmit}>
             <input
               type="text"
-              name="eventName"
+              name="name"
               placeholder="Name of the event"
               required
-              value={data.eventName}
+              value={data.name}
               onChange={handleChange}
               className="bg-white rounded-2xl p-[9px] border"
             />
@@ -86,10 +87,10 @@ const UpdateEventForm = ({ eventId }) => {
             <p>Enter Event Day</p>
             <input
               type="date"
-              name="eventDate"
+              name="date"
               placeholder="Enter event Date"
               required
-              value={data.eventDate}
+              value={ data.date ?  new Date(data?.date)?.toISOString()?.split('T')[0]:''}
               onChange={handleChange}
               className="bg-white rounded-2xl p-[9px] border"
             />
