@@ -20,12 +20,18 @@ const OrganizerEvents = () => {
   },[])
 
 
-  const handleDelete=async(id)=>{
-    const url=`http://localhost:8080/api/events/delete/${id}`;
-    const {data:res}=await axios.delete(url);
-    console.log(res);
-    toast.success("Deletion Succesfull!")
-  }
+  const handleDelete = async (id) => {
+    try {
+      const url = `http://localhost:8080/api/events/delete/${id}`;
+      await axios.delete(url);
+      setData(data.filter(item => item._id !== id)); // Update data without the deleted item
+      toast.success("Deletion Successful!");
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      toast.error("Error deleting event.");
+    }
+  };
+
   return (
     <>
     <ToastContainer />
@@ -34,7 +40,7 @@ const OrganizerEvents = () => {
           {/* //map vaneko js ho so use in curly */}
           {data.map((item,i)=>
           (
-            <div key={i} className="p-4 border rounded-2xl shadow-2xl mb-6">
+            <div key={i} className="p-4 border rounded-2xl shadow-xl mb-6">
               <img src={item.image.url} alt="banner" className="w-[40vw] rounded-xl " />
               <div>
               <div>

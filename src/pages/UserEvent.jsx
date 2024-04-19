@@ -24,7 +24,7 @@ const UserEvent = () => {
       </p>
       <div className="p-6 flex flex-wrap gap-8">
         {data.map((item, i) => (
-          <div key={i} className="p-4 ml-3 border rounded-2xl shadow-2xl mt-4 mb-4">
+          <div key={i} className="p-4 ml-3 border rounded-2xl shadow-xl mt-4 mb-4">
             <img
               src={item.image.url}
               alt="banner"
