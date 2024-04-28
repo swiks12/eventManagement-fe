@@ -23,7 +23,7 @@ const UserNav = () => {
             <p className="font-semibold">EVENTS</p>
           </div>
         </Link>
-        <Link to="">
+        <Link to="/user/explore">
           <div className="flex flex-row gap-1">
             <span class="material-symbols-outlined">search</span>
             <p className="font-semibold">EXPLORE</p>

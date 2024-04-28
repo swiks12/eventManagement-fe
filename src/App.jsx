@@ -15,6 +15,7 @@ import Landing from "./pages/landing";
 import IndividualEvent from "./pages/IndividualEvent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UpdateEventForm from "./pages/updateEventForm";
+import UserExplore from "./pages/UserExplore";
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
           <Route path="/user" element={<UserNav />}>
           <Route path="home" element={<UserHome />}/>
           <Route path="events" element={<UserEvent />}/>
+          <Route path="explore" element={<UserExplore />}/>
+
           <Route path="events/:id" element={<IndividualEvent />}/>
           </Route>
         </Routes>
