@@ -40,7 +40,7 @@ const UserEvent = () => {
                     {item.date}
                   </p>
                 </div>
-                <div className="flex flex-row">
+                <div className="flex flex-row gap-2">
                     <span class="material-symbols-outlined">paid</span>
                     <p>
                     {item.price}

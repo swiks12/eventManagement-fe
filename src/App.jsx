@@ -16,6 +16,9 @@ import IndividualEvent from "./pages/IndividualEvent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UpdateEventForm from "./pages/updateEventForm";
 import UserExplore from "./pages/UserExplore";
+import Success from "./pages/Success";
+import Attendee from "./pages/Attendee";
+import PaymentOrg from "./pages/PaymentOrg";
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
         <Routes>
         <Route path="/organizer" element={<NavbarComp />}>
           <Route path="home" element={<OrganizerHome />}/>
+          <Route path="attendee" element={<Attendee />}/>
+          <Route path="payment" element={<PaymentOrg/>}/>
           <Route path="events" element={<OrganizerEvents />}/>
           <Route path="events/create" element={<CreateEventForm/>}/>
           <Route path="update/:id" element={<UpdateEventForm />}/>
@@ -44,7 +49,7 @@ function App() {
           <Route path="home" element={<UserHome />}/>
           <Route path="events" element={<UserEvent />}/>
           <Route path="explore" element={<UserExplore />}/>
-
+          <Route path="success/:id" element={<Success />}/>
           <Route path="events/:id" element={<IndividualEvent />}/>
           </Route>
         </Routes>

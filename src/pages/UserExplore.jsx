@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import UserGeolocation from "./UserGeolocation";
 import world from "../assets/world.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 
 // Function to calculate Euclidean distance
 function calculateEuclideanDistance(point1, point2) {
@@ -18,6 +21,7 @@ function sortByDistance(events) {
 
 // Component for exploring nearest events
 const UserExplore = () => {
+const navigate=useNavigate();
   // State for storing events and user location
   const [events, setEvents] = useState([]);
   const location = UserGeolocation();
@@ -64,11 +68,11 @@ const UserExplore = () => {
 
   // Get the nearest events list with k = 4
   const nearestEventsList = nearestEvents(2);
-//   console.log(nearestEventsList); // Check the sorted events in the console
+  //   console.log(nearestEventsList); // Check the sorted events in the console
 
   // Render the component with the nearest events list
   return (
-    <>
+    <div>
       <div className="flex items-center gap-3 border m-6 rounded-2xl bg-pink-200 shadow-xl">
         <img src={world} alt="" className="w-[25vw] ml-[100px]" />
         <div className="border w-fit p-3 rounded-xl bg-white">
@@ -88,21 +92,26 @@ const UserExplore = () => {
         </div>
       </div>
       <div className="m-6">
-        <p>Nearest Events According to your location:</p>
+        <p className="text-2xl font-semibold mb-3">Nearest Events According to your location:</p>
         <ul>
           {nearestEventsList.map((event) => (
-            <div className="border p-2 rounded-xl mb-[10px] shadow-md" >
+            <div className="border p-2 rounded-xl mb-[10px] shadow-md">
               <li key={event._id}>
-                <p>{event.name}</p>
-                <p>{event.date ? new Date(event.date).toISOString().split('T')[0] : ''}</p>
-                <p>{event.time}</p>
+                <p className="font-bold">{event.name}</p>
+                {/* <p>{event.date ? new Date(event.date).toISOString().split('T')[0] : ''}</p>
+                <p>{event.time}</p> */}
                 <p>{event.address}</p>
               </li>
+              <div className="flex justify-end" onClick={()=>{
+                navigate(`/user/events/${event._id}`)
+              }}>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+              </div>
             </div>
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 

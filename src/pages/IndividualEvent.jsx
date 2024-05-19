@@ -8,6 +8,10 @@ const IndividualEvent = () => {
 
   const params = useParams();
 
+//getting the user from local storage
+ const user=JSON.parse(localStorage.getItem("user-data"));
+ console.log(user,"this is user");
+
   useEffect(() => {
     const fetchIndividualEvents = async () => {
       const url = `http://localhost:8080/api/events/individualEvents/${params.id}`;
@@ -17,13 +21,28 @@ const IndividualEvent = () => {
     fetchIndividualEvents();
   }, [params.id]);
 
-
   //dependency ma rakheko chiz jaba jaba change huncha taba taba chai api hit hanne-aaile ko case ma
-
 
   if (!data) {
     return <div>Loading...</div>; // Return a loading indicator while data is being fetched
   }
+
+  const buyTickets = async () => {
+    try {
+      const url = "http://localhost:8080/api/create-checkout-session";
+      const { data: res } = await axios.post(url, {
+        name: data.name,
+        price: parseFloat(data.price),
+        eventId:data._id,
+        userId:user._id// Parse price as a float
+      });
+      window.location.href = res.url;
+    } catch (error) {
+      console.log("Error creating checkout session", error);
+    }
+  };
+  
+  
 
   return (
     <div className="p-12 flex flex-col gap-4 border shadow-2xl rounded-2xl m-5">
@@ -54,7 +73,12 @@ const IndividualEvent = () => {
         <p>{data.description}</p>
       </div>
       <div className="flex justify-center mt-8">
-        <Button data="Buy Ticket" />
+        <button
+          className="bg-black text-white p-4 rounded-2xl"
+          onClick={buyTickets}
+        >
+          Buy Ticket
+        </button>
       </div>
     </div>
   );
